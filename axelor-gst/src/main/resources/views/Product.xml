@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+    
+  <grid name="product-grid" extension="true" title="Products" model="com.axelor.apps.base.db.Product" orderBy="code,name" x-row-height="80">
+    <extend target="//field[@name='internalDescription']" if-module="axelor-gst">
+      <insert position="before">
+        <field name="gstRate" if="__config__.app.isApp('gst')" />
+      </insert>
+    </extend>
+  </grid>
+  
+  <form name="product-form" extension="true" title="Product" model="com.axelor.apps.base.db.Product" 
+	onNew="action-group-base-product-onnew"
+	onLoad="action-group-product-onload" width="large">
+	  <extend target="panel-tabs[@name='productSpecificAttributes']/panel[@name='salePanel']/panel[@name='subSalePanel']/panel[@name='unitsPanel']" if-module="axelor-gst">
+      <insert position="after">
+        <panel name="gstPanel" title="GST" colSpan="12">
+          <field name="gstRate" colSpan="6" />
+          <field name="hsbn" colSpan="6" />
+        </panel>
+      </insert>
+    </extend>
+     <extend target="//field[@name='productCategory']">
+    		<attribute name="onChange" value="action-product-attrs-set-gstrate"/>
+      </extend>
+   </form>
+   
+       <action-attrs name="action-product-attrs-set-gstrate">
+      <attribute name="value" for="gstRate" expr="eval: productCategory?.gstRate"/>
+    </action-attrs>
+</object-views>
+
+
