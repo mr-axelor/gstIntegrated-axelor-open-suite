@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+<form name="invoice-form" extension="true" id="gst-invoice-form" title="Invoice" model="com.axelor.apps.account.db.Invoice">
+  <extend target="panel[@name='invoicingInfoPanel']/panel[@name='addressPanel']/field[@name='address']"	>
+    <attribute name="title" value="Invoice Address" />
+  </extend>
+  <extend target="panel[@name='invoicingInfoPanel']/panel[@name='addressPanel']/field[@name='addressStr']">
+    <attribute name="title" value="Invoice Address" />
+  </extend>
+  
+  <extend target="panel[@name='totalsPanel']/field[@name='inTaxTotal']">
+    <replace>
+      <field name="inTaxTotal" css="order-subtotal" showTitle="false" colSpan="12" onChange="action-invoice-attrs-set-gst-taxes">
+				<viewer depends="exTaxTotal,currency.symbol,taxTotal,netIGST,netCgst,netSgst"><![CDATA[
+		         <dl class="dl-horizontal">
+		           <dt x-translate>Total W.T.</dt>
+		           <dd>{{record.exTaxTotal}} {{record.currency.symbol}}</dd>
+		           <dt x-translate ng-if="record.netSgst>0">SGST</dt>
+		           <dd ng-if="record.netSgst>0">{{record.netSgst | number : 2}} {{record.currency.symbol}}</dd>
+		           <dt x-translate ng-if="record.netCgst>0">CGST</dt>
+		           <dd ng-if="record.netCgst>0">{{record.netCgst | number : 2}} {{record.currency.symbol}}</dd>
+		           <dt x-translate ng-if="record.netIgst>0">IGST</dt>
+		           <dd ng-if="record.netIgst>0">{{record.netIgst | number : 2}} {{record.currency.symbol}}</dd>
+		           <dt x-translate ng-if="record.netIgst==0 && record.netCgst==0">Total Tax</dt><dt x-translate ng-if="!(record.netIgst==0 && record.netCgst==0) && record.taxTotal-record.netIgst>0 && record.taxTotal-record.netCgst*2>0">Other taxes</dt>
+		           <dd ng-if="record.taxTotal-record.netIgst>0 && record.taxTotal-record.netCgst*2>0"><span ng-if="record.netIgst>0">{{(record.taxTotal-record.netIgst) | number : 2}}</span><span ng-if="record.netCgst>0">{{(record.taxTotal-record.netCgst*2) | number : 2}}</span> <span ng-if="record.netIgst==0 && record.netCgst==0">{{record.taxTotal}}</span>{{record.currency.symbol}}</dd>
+		           <dt class="order-subtotal-total" x-translate>Total A.T.I. </dt>
+		           <dd class="order-subtotal-total">{{record.inTaxTotal}} {{record.currency.symbol}}</dd>
+		         </dl>]]>
+				</viewer>
+			</field>
+			<field name="netIgst" hidden="true" />
+			<field name="netCgst" hidden="true" />
+			<field name="netSgst" hidden="true" />
+    </replace>
+  </extend>
+  
+  <extend target="panel[@name='invoicingInfoPanel']/panel[@name='addressPanel']/field[@name='address']">
+    <attribute name="readonlyIf" value="address &amp;&amp; invoiceLineList"/>
+  </extend>
+
+</form>
+
+<action-record name="action-invoice-record-partner-change" model="com.axelor.apps.account.db.Invoice" id="gst-action-invoice-record-partner-change">
+    	<field name="paymentCondition" expr="eval: partner?.paymentCondition"/>
+		<field name="address" expr="call:com.axelor.apps.base.service.PartnerService:getInvoicingAddress(partner)"/>
+    	<field name="currency" expr="eval: partner?.currency"/>
+		<field name="bankDetails" expr="eval: partner?.bankDetailsList.find{ it -&gt; it.isDefault &amp;&amp; it.active} ? partner?.bankDetailsList.find{ it -&gt; it.isDefault &amp;&amp; it.active} : null" />
+    	<field name="contactPartner" expr= "eval: partner?.contactPartnerSet?.find{it.contactType==1}" if="eval: partner?.contactPartnerSet?.find{it.contactType==1}" />
+    	<field name="contactPartner" expr= "eval: partner?.contactPartnerSet[0]" if="eval: !(partner?.contactPartnerSet?.find{it.contactType==1})" />    	
+    	<field name="invoicesCopySelect" expr="eval: partner?.invoicesCopySelect != 0 ? partner?.invoicesCopySelect :1"/>
+    	<field name="project" expr="eval: null"/>
+    	<field name="purchaseOrder" expr="eval: null"/>
+    	<field name="partnerTaxNbr" expr="eval: partner?.taxNbr"/>
+    	<field name="proformaComments" expr="eval: partner?.proformaComments"/>
+      <field name="headOfficeAddress" expr="eval: partner?.headOfficeAddress"/>
+    </action-record>
+
+
+
+</object-views>

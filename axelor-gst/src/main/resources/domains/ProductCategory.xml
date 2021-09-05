@@ -6,7 +6,7 @@
   <module name="base" package="com.axelor.apps.base.db"/>
   
   <entity name="ProductCategory" lang="java" cacheable="true">
-	<decimal name="gstRate" title="GST Rate"/>
+	<many-to-one name="gstRate" title="GST Rate" ref="com.axelor.apps.account.db.Tax" />
   </entity>
   
 </domain-models>

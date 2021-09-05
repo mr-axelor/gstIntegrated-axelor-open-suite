@@ -6,4 +6,14 @@
 	<menuitem name="gst-root" title="GST" order="-107" if="__config__.app.isApp('gst')"
 		icon="fa fa-money" icon-background="#2fa042"/>
 		
+		 
+    <menuitem name="admin-root-organisation-territory-state"
+        parent="admin-root-organisation-territory" title="States"
+        action="admin.root.organisation.territory.state" if="__config__.app.isApp('gst')" />
+	
+	<action-view name="admin.root.organisation.territory.state" title="States" model="com.axelor.apps.gst.db.State">
+	  <view type="grid" name="state-grid" />
+	  <view type="form" name="state-form"/>
+	</action-view>	
+	
 </object-views>

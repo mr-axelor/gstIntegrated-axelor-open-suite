@@ -2,9 +2,11 @@
 <object-views xmlns="http://axelor.com/xml/ns/object-views"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
-	
-	<form name="app-gst-config-form" title="App Gst" model="com.axelor.apps.base.db.AppGst" canDelete="false" canNew="false" width="large">
-		<field name="allInvoiceBelongsToGst" help="This configuration, when active, will allow only GST related tax information while adding a Invoice Line" />
-	</form>
-	
+
+	<selection name="gst.partner.contact.type.select">
+      <option value="1">Primary</option>
+      <option value="2">Secondary</option>
+      <option value="3">Others</option>
+    </selection>
+
 </object-views>

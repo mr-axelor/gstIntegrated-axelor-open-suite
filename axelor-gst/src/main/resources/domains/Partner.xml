@@ -7,6 +7,8 @@
   
   <entity name="Partner" lang="java">
 	<string name="gstin" min="15" max="15" title="GSTIN" />
+	<string name="secondaryEmail" title="Secondary Email" />
+	<integer name="contactType" title="Contact Type" selection="gst.partner.contact.type.select"/>
   </entity>
   
 </domain-models>

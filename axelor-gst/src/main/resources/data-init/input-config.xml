@@ -8,4 +8,12 @@
 	  <bind column="dependsOn" to="dependsOnSet" search="self.code in :dependsOn" eval="dependsOn.split(',') as List"/>
 	</input>
 	
+	<input file="account_taxLine.csv" separator=";" type="com.axelor.apps.account.db.TaxLine" search="self.importId = :importId and self.tax.code = :tax_code">
+		<bind to="tax" search="self.code = :tax_code" />
+	</input>	
+	
+	<input file="account_tax.csv" separator=";" update="true" search="self.importId = :importId" type="com.axelor.apps.account.db.Tax">
+		<bind to="activeTaxLine" search="self.importId = :_activeTaxLine AND self.tax.code = :code" update="true" />
+	</input>
+	
 </csv-inputs>

@@ -3,7 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
     
-  <grid name="product-grid" extension="true" title="Products" model="com.axelor.apps.base.db.Product" orderBy="code,name" x-row-height="80">
+  <grid name="product-grid" id="gst-product-grid" extension="true" title="Products" model="com.axelor.apps.base.db.Product" orderBy="code,name" x-row-height="80">
     <extend target="//field[@name='internalDescription']" if-module="axelor-gst">
       <insert position="before">
         <field name="gstRate" if="__config__.app.isApp('gst')" />
@@ -11,7 +11,7 @@
     </extend>
   </grid>
   
-  <form name="product-form" extension="true" title="Product" model="com.axelor.apps.base.db.Product" 
+  <form name="product-form" id="gst-product-form" extension="true" title="Product" model="com.axelor.apps.base.db.Product" 
 	onNew="action-group-base-product-onnew"
 	onLoad="action-group-product-onload" width="large">
 	  <extend target="panel-tabs[@name='productSpecificAttributes']/panel[@name='salePanel']/panel[@name='subSalePanel']/panel[@name='unitsPanel']" if-module="axelor-gst">

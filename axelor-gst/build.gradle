@@ -12,5 +12,5 @@ axelor {
 }
 
 dependencies {
-api project(":modules:axelor-base")
+api project(":modules:axelor-cash-management")
 }

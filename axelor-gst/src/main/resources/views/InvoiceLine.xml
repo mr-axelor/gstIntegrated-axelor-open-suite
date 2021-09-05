@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+  <form name="invoice-line-form" id="gst-invoice-line-client-form" extension="true" title="Invoice line" model="com.axelor.apps.account.db.InvoiceLine" width="large">
+    <extend target="panel-tabs[@name='mainPanelTab']/panel[@name='informationsPanel']/field[@name='inTaxTotal']">
+      <insert position="after">
+        <field name="igst" readonly="true" showIf="taxLine.name.includes('GST')"/>
+        <field name="cgst" readonly="true" showIf="taxLine.name.includes('GST')"/>
+        <field name="sgst" readonly="true" showIf="taxLine.name.includes('GST')"/>
+      </insert>
+    </extend>
+    <extend target="panel-tabs[@name='mainPanelTab']/panel[@name='informationsPanel']/field[@name='price']">
+      <insert position="after">
+        <field name="hsbn" colSpan="3" />
+      </insert>
+    </extend>
+  </form>
+</object-views>

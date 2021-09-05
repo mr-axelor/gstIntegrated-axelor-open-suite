@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+			  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+	<grid name="partner-grid" extension="true" id="gst-partner-grid" title="Partners" model="com.axelor.apps.base.db.Partner" orderBy="name">
+	    <extend target="//field[@name='mainAddress']">
+	      <insert position="after">
+	        <field name="gstin" />
+	      </insert>
+	    </extend>
+	</grid>
+	
+	<grid name="partner-contact-grid" extension="true" id="gst-partner-contact-grid" title="Contacts" model="com.axelor.apps.base.db.Partner">
+	  <extend target="//field[@name='simpleFullName']">
+	    <insert position="after">
+	      <field name="contactType" />
+	    </insert>
+	  </extend>
+	  <extend target="//field[@name='emailAddress.address']">
+	    <insert position="after">
+	      <field name="secondaryEmail" />
+	    </insert>
+	  </extend>
+	  <extend target="//field[@name='fixedPhone']">
+	    <attribute name="title" value="Primary Phone"/>
+	  </extend>
+	  <extend target="//field[@name='mobilePhone']">
+	    <attribute name="title" value="Secondary Phone"/>
+	  </extend>
+	  <extend target="//field[@name='emailAddress.address']">
+	    <attribute name="title" value="Primary Email"/>
+	  </extend>
+	</grid>
+	
+	<form name="partner-form" extension="true" id="gst-partner-form" title="Partners" model="com.axelor.apps.base.db.Partner"  >
+	  <extend target="panel-tabs[@name='mainPanelTab']/panel[@name='informationPanel']/panel[@name='partnerDetailsPanel']/panel[@name='partnerCategoryPanel']/field[@name='department']">
+	    <insert position="after">
+	      <field name="gstin" />
+	    </insert>
+	  </extend>
+	</form>
+	
+	<form name="partner-contact-form" extension="true" id="gst-partner-contact-form" title="Contacts" model="com.axelor.apps.base.db.Partner"
+	onNew="action-partner-contact-record-default,action-partner-attrs-partner-seq-editable"
+		  onLoad="action-group-partner-contact-onload"
+		  onSave="save,action-partner-method-set-user-partner,action-partner-method-add-contact-partner" >
+	  <extend target="panel-tabs[@name='mainPanelTab']/panel[@name='contactDetailsPanel']/field[@name='jobTitleFunction']">
+	    <insert position="before">
+	      <field name="contactType" />
+	    </insert>
+	  </extend>
+	  <extend target="panel-tabs[@name='mainPanelTab']/panel[@name='contactDetailsPanel']/field[@name='emailAddress']">
+	    <insert position="after">
+	      <field name="secondaryEmail" />
+	    </insert>
+	  </extend>
+	  <extend target="panel-tabs[@name='mainPanelTab']/panel[@name='contactDetailsPanel']/field[@name='fixedPhone']">
+	    <attribute name="title" value="Primary Phone"/>
+	  </extend>
+	  <extend target="panel-tabs[@name='mainPanelTab']/panel[@name='contactDetailsPanel']/field[@name='mobilePhone']">
+	    <attribute name="title" value="Secondary Phone"/>
+	  </extend>
+	  <extend target="panel-tabs[@name='mainPanelTab']/panel[@name='contactDetailsPanel']/field[@name='emailAddress']">
+	    <attribute name="title" value="Primary Email"/>
+	  </extend>
+	</form>
+	
+</object-views>
