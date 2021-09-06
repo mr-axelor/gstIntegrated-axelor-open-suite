@@ -25,7 +25,7 @@ public class InvoiceLineGstController extends InvoiceLineController {
 			BigDecimal unitPrice = invoiceLine.getPrice();
 			BigDecimal totalPriceWithoutTax = qty.multiply(unitPrice);
 			BigDecimal totalGstTax = gstRate.multiply(totalPriceWithoutTax);
-			if(invoice.getAddress().getState()!=null && invoice.getCompany().getAddress().getState()!=null){
+			if(invoice.getAddress()!=null && invoice.getCompany().getAddress()!=null && invoice.getAddress().getState()!=null && invoice.getCompany().getAddress().getState()!=null){
 				if(!(invoice.getAddress().getState()!=null && invoice.getAddress().getState().equals(invoice.getCompany().getAddress().getState()))) {
 					response.setValue("igst", totalGstTax);
 					
