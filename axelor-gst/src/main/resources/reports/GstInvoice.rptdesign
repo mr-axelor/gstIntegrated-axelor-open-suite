@@ -8916,7 +8916,11 @@ row["message_key"]
                                                 <property name="paddingRight">5pt</property>
                                                 <property name="textAlign">right</property>
                                                 <text-data id="6050">
-                                                    <expression name="valueExpr">row._outer["invoice_tax_total"]-(row["net_sgst"]+row["net_cgst"]+row["net_igst"])</expression>
+                                                    <expression name="valueExpr">if(row._outer["invoice_tax_total"]-(row["net_sgst"]+row["net_cgst"]+row["net_igst"])>0){
+	row._outer["invoice_tax_total"]-(row["net_sgst"]+row["net_cgst"]+row["net_igst"])
+}else{
+	0
+}</expression>
                                                     <property name="contentType">html</property>
                                                 </text-data>
                                             </cell>
