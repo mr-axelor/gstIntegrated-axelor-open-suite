@@ -24,7 +24,7 @@
 		           <dd ng-if="record.netCgst>0">{{record.netCgst | number : 2}} {{record.currency.symbol}}</dd>
 		           <dt x-translate ng-if="record.netIgst>0">IGST</dt>
 		           <dd ng-if="record.netIgst>0">{{record.netIgst | number : 2}} {{record.currency.symbol}}</dd>
-		           <dt x-translate ng-if="record.netIgst==0 && record.netCgst==0">Total Tax</dt><dt x-translate ng-if="!(record.netIgst==0 && record.netCgst==0) && record.taxTotal-record.netIgst>0 && record.taxTotal-record.netCgst*2>0">Other taxes</dt>
+		           <dt x-translate ng-if="record.netIgst==0 && record.netCgst==0 && record.taxTotal>0">Total Tax</dt><dt x-translate ng-if="!(record.netIgst==0 && record.netCgst==0) && record.taxTotal-record.netIgst>0 && record.taxTotal-record.netCgst*2>0">Other taxes</dt>
 		           <dd ng-if="record.taxTotal-record.netIgst>0 && record.taxTotal-record.netCgst*2>0"><span ng-if="record.netIgst>0">{{(record.taxTotal-record.netIgst) | number : 2}}</span><span ng-if="record.netCgst>0">{{(record.taxTotal-record.netCgst*2) | number : 2}}</span> <span ng-if="record.netIgst==0 && record.netCgst==0">{{record.taxTotal}}</span>{{record.currency.symbol}}</dd>
 		           <dt class="order-subtotal-total" x-translate>Total A.T.I. </dt>
 		           <dd class="order-subtotal-total">{{record.inTaxTotal}} {{record.currency.symbol}}</dd>
@@ -42,6 +42,30 @@
   </extend>
 
 </form>
+
+
+  <kanban name="invoice-kanban" title="Invoice"
+    model="com.axelor.apps.account.db.Invoice" columnBy="status"
+    sequenceBy="priority" onMove="action-invoice-method-manage-status-flow">
+    <field name="status" />
+    <field name="company" />
+    <field name="netAmount" />
+    <field name="netIgst" />
+    <field name="netCgst" />
+    <field name="netSgst" />
+    <field name="grossAmount" />
+    <field name="invoiceLineList" />
+    <hilite color="info" if="true" />
+    <template><![CDATA[
+  <div class="card">
+  <div class="card-body">
+  <h4>Company:{{company.name}}</h4>
+  <h6>Party:{{partner.name}}</h6>
+  <h6>NetAmount:{{netAmount}}</h6>
+  </div>
+  </div>
+  ]]></template>
+  </kanban>
 
 <action-record name="action-invoice-record-partner-change" model="com.axelor.apps.account.db.Invoice" id="gst-action-invoice-record-partner-change">
     	<field name="paymentCondition" expr="eval: partner?.paymentCondition"/>

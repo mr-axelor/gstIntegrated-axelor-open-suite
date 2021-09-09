@@ -2805,7 +2805,7 @@ group by ProductCategory.id , ProductCategory.name]]></xml-property>
                                                                             </structure>
                                                                         </list-property>
                                                                         <property name="contentType">html</property>
-                                                                        <text-property name="content"><![CDATA[<B><VALUE-OF>row["translation"]</VALUE-OF> :</B> <VALUE-OF>row._outer._outer["hsbn"]</VALUE-OF>]]></text-property>
+                                                                        <text-property name="content"><![CDATA[<B>HSBN:</B> <VALUE-OF>row._outer._outer["hsbn"]</VALUE-OF>]]></text-property>
                                                                     </text>
                                                                     <text-data id="5491">
                                                                         <property name="display">inline</property>
@@ -2922,7 +2922,7 @@ group by ProductCategory.id , ProductCategory.name]]></xml-property>
                                                                             </structure>
                                                                         </list-property>
                                                                         <property name="contentType">html</property>
-                                                                        <text-property name="content"><![CDATA[<B><VALUE-OF>row["translation"]</VALUE-OF> :</B>&amp;nbsp;<VALUE-OF>row._outer._outer["purchase_price"]</VALUE-OF>&amp;nbsp;<VALUE-OF>row._outer._outer["currency"]</VALUE-OF>&amp;nbsp;]]></text-property>
+                                                                        <text-property name="content"><![CDATA[<B>Purchase Price :</B>&amp;nbsp;<VALUE-OF>row._outer._outer["purchase_price"]</VALUE-OF>&amp;nbsp;<VALUE-OF>row._outer._outer["currency"]</VALUE-OF>&amp;nbsp;]]></text-property>
                                                                     </text>
                                                                     <text id="5409">
                                                                         <property name="fontSize">10.5pt</property>
@@ -2952,7 +2952,7 @@ group by ProductCategory.id , ProductCategory.name]]></xml-property>
                                                                             </structure>
                                                                         </list-property>
                                                                         <property name="contentType">html</property>
-                                                                        <text-property name="content"><![CDATA[<B><VALUE-OF>row["translation"]</VALUE-OF> :</B><VALUE-OF format="^">"  "</VALUE-OF><VALUE-OF>Formatter.format(row._outer._outer["sale_price"], "#,##0." + "0".repeat(row._outer["nb_decimal_digit_for_unit_price"]))</VALUE-OF><VALUE-OF format="^">" "</VALUE-OF><VALUE-OF>row._outer._outer["currency"]</VALUE-OF> &amp;nbsp;]]></text-property>
+                                                                        <text-property name="content"><![CDATA[<B>Sale Price :</B><VALUE-OF format="^">"  "</VALUE-OF><VALUE-OF>Formatter.format(row._outer._outer["sale_price"], "#,##0." + "0".repeat(row._outer["nb_decimal_digit_for_unit_price"]))</VALUE-OF><VALUE-OF format="^">" "</VALUE-OF><VALUE-OF>row._outer._outer["currency"]</VALUE-OF> &amp;nbsp;]]></text-property>
                                                                     </text>
                                                                 </cell>
                                                             </row>

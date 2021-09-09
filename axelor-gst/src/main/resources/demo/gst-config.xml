@@ -3,10 +3,6 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://axelor.com/xml/ns/data-import http://axelor.com/xml/ns/data-import/data-import_5.3.xsd">
     
-	<input file="base_appGst.csv" separator=";" type="com.axelor.apps.base.db.AppGst"
-	  call="com.axelor.csv.script.ImportApp:importApp">
-	  <bind column="dependsOn" to="dependsOnSet" search="self.code in :dependsOn" eval="dependsOn.split(',') as List"/>
-	</input>
 	
 	<input file="account_tax.csv" separator=";" type="com.axelor.apps.account.db.Tax" search="self.code = :code" />
 

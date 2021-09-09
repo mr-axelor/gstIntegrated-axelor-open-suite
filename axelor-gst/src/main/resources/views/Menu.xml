@@ -14,6 +14,17 @@
 	<action-view name="admin.root.organisation.territory.state" title="States" model="com.axelor.apps.gst.db.State">
 	  <view type="grid" name="state-grid" />
 	  <view type="form" name="state-form"/>
-	</action-view>	
+	</action-view>
+	
+	<action-view name="invoice.root.custinvoices" id="gst.invoice.root.custinvoices" title="Cust. Invoices"
+		model="com.axelor.apps.account.db.Invoice">
+		<view type="grid" name="invoice-grid"/>
+		<view type="form" name="invoice-form"/>
+		<view type="kanban" name="invoice-kanban" if="__config__.app.isApp('gst')"/>
+		<view-param name="search-filters" value="customer-invoices-filters"/>
+		<domain>self.operationTypeSelect = 3</domain>
+		<context name="_operationTypeSelect" expr="eval:3"/>
+		<context name="todayDate" expr="eval:__config__.app.getTodayDate(__user__.activeCompany)" />
+	</action-view>
 	
 </object-views>

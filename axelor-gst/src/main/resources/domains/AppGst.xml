@@ -5,7 +5,7 @@
 	<module name="base" package="com.axelor.apps.base.db"/>
 
 	<entity name="AppGst" lang="java" extends="App">
-	  <boolean name="allInvoiceBelongsToGst" title="Make All Invoices related to GST?" />
+	  
 	</entity>
 
 </domain-models>
