@@ -43,7 +43,6 @@ public class InvoiceLineGstController extends InvoiceLineController {
       } else {
         response.setValue("taxLine", null);
         response.setValue("inTaxTotal", 0);
-        // response.setError(I18n.get("cant"));
         response.setFlash(
             I18n.get(
                 "Both the invoice address & company address should contain STATE information without which it is not possible to calculate the GST"));
