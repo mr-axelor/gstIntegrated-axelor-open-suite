@@ -5927,7 +5927,7 @@ row["message_key"]
                                 <property name="name">in_tax_total</property>
                                 <text-property name="displayName">other_taxes</text-property>
                                 <expression name="expression" type="javascript">if((dataSetRow["in_tax_total"]-(dataSetRow["ex_tax_total"]+dataSetRow["igst"]+dataSetRow["sgst"]+dataSetRow["cgst"]))>0){
-dataSetRow["in_tax_total"]-(dataSetRow["ex_tax_total"]+dataSetRow["igst"]+dataSetRow["sgst"]+dataSetRow["cgst"])+" "+dataSetRow["currencycode"]
+(dataSetRow["in_tax_total"]-(dataSetRow["ex_tax_total"]+dataSetRow["igst"]+dataSetRow["sgst"]+dataSetRow["cgst"]))
 }else{
 0
 }</expression>
@@ -6497,7 +6497,7 @@ dataSetRow["in_tax_total"]-(dataSetRow["ex_tax_total"]+dataSetRow["igst"]+dataSe
                                     <property name="borderTopWidth">medium</property>
                                     <text id="6079">
                                         <property name="contentType">html</property>
-                                        <text-property name="content"><![CDATA[<B>Other Taxes</B>]]></text-property>
+                                        <text-property name="content"><![CDATA[<B>Non GST Taxes</B>]]></text-property>
                                     </text>
                                 </cell>
                                 <cell id="6095">
@@ -8965,7 +8965,7 @@ dataSetRow["in_tax_total"]-(dataSetRow["ex_tax_total"]+dataSetRow["igst"]+dataSe
                                                         </structure>
                                                     </list-property>
                                                     <property name="contentType">html</property>
-                                                    <text-property name="content"><![CDATA[Other Taxes]]></text-property>
+                                                    <text-property name="content"><![CDATA[Non GST Taxes]]></text-property>
                                                 </text>
                                             </cell>
                                             <cell id="6047">
