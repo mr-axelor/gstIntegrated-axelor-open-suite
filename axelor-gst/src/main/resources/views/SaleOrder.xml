@@ -10,16 +10,16 @@
 	      <viewer depends="exTaxTotal,currency.symbol,taxTotal,statusSelect,amountInvoiced,advanceTotal,netCgst,netIgst,netSgst"><![CDATA[
 
 	                  <dl class="dl-horizontal">
-	                      <dt x-translate>Total W.T..........{{record.netCgst}}</dt>
+	                      <dt x-translate>Total W.T.</dt>
 	                      <dd>{{record.exTaxTotal}}  {{record.currency.symbol}} </dd>
 	                      <dt x-translate>Net CGST</dt>
-	                      <dd>{{record.netCgst}}  {{record.currency.symbol}}</dd>
+	                      <dd>{{record.netCgst | number : 2}}  {{record.currency.symbol}}</dd>
 	                      <dt x-translate>Net SGST</dt>
-	                      <dd>{{record.netSgst}}  {{record.currency.symbol}}</dd>
+	                      <dd>{{record.netSgst | number : 2}}  {{record.currency.symbol}}</dd>
 	                      <dt x-translate>Net IGST</dt>
-	                      <dd>{{record.netIgst}}  {{record.currency.symbol}}</dd>
+	                      <dd>{{record.netIgst | number : 2}}  {{record.currency.symbol}}</dd>
 	                      <dt x-translate>Non GST Taxes</dt>
-	                      <dd>{{record.taxTotal - record.netIgst-record.netCgst-record.netSgst}}  {{record.currency.symbol}}</dd>
+	                      <dd>{{record.taxTotal - record.netIgst-record.netCgst-record.netSgst | number : 2}}  {{record.currency.symbol}}</dd>
 	                      <dt x-translate>Total tax</dt>
 	                      <dd>{{record.taxTotal}}  {{record.currency.symbol}}</dd>
 	                      <dt class="order-subtotal-total" x-translate>Total A.T.I.</dt>
@@ -27,7 +27,7 @@
 	                      <dt ng-show="record.statusSelect >= 3" x-translate>Amount invoiced W.T.</dt>
 	                      <dd ng-show="record.statusSelect >= 3">{{record.amountInvoiced}}  {{record.currency.symbol}}</dd>
 	                      <dt ng-show="record.statusSelect >= 2" x-translate>Advance payment total</dt>
-	                      <dd ng-show="record.statusSelect >= 2">{{record.advanceTotal}}  {{record.currency.symbol}} Working</dd>
+	                      <dd ng-show="record.statusSelect >= 2">{{record.advanceTotal}}  {{record.currency.symbol}} </dd>
 	                  
 	                  </dl>
 						Cgst: {{record.netCgst}}
