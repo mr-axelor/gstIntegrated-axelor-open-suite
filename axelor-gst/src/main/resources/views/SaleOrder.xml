@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+<form id="gst-sale-order-form" name="sale-order-form" title="Sale order" model="com.axelor.apps.sale.db.SaleOrder" extension="true">
+  <extend target="panel[@name='inTaxTotalPanel']/field[@name='inTaxTotal']">
+  <replace>
+  <field name="inTaxTotal" showTitle="false" colSpan="12" css="order-subtotal">
+	      <viewer depends="exTaxTotal,currency.symbol,taxTotal,statusSelect,amountInvoiced,advanceTotal,netCgst,netIgst,netSgst"><![CDATA[
+
+	                  <dl class="dl-horizontal">
+	                      <dt x-translate>Total W.T..........{{record.netCgst}}</dt>
+	                      <dd>{{record.exTaxTotal}}  {{record.currency.symbol}} </dd>
+	                      <dt x-translate>Net CGST</dt>
+	                      <dd>{{record.netCgst}}  {{record.currency.symbol}}</dd>
+	                      <dt x-translate>Net SGST</dt>
+	                      <dd>{{record.netSgst}}  {{record.currency.symbol}}</dd>
+	                      <dt x-translate>Net IGST</dt>
+	                      <dd>{{record.netIgst}}  {{record.currency.symbol}}</dd>
+	                      <dt x-translate>Non GST Taxes</dt>
+	                      <dd>{{record.taxTotal - record.netIgst-record.netCgst-record.netSgst}}  {{record.currency.symbol}}</dd>
+	                      <dt x-translate>Total tax</dt>
+	                      <dd>{{record.taxTotal}}  {{record.currency.symbol}}</dd>
+	                      <dt class="order-subtotal-total" x-translate>Total A.T.I.</dt>
+	                      <dd class="order-subtotal-total">{{record.inTaxTotal}}  {{record.currency.symbol}}</dd>
+	                      <dt ng-show="record.statusSelect >= 3" x-translate>Amount invoiced W.T.</dt>
+	                      <dd ng-show="record.statusSelect >= 3">{{record.amountInvoiced}}  {{record.currency.symbol}}</dd>
+	                      <dt ng-show="record.statusSelect >= 2" x-translate>Advance payment total</dt>
+	                      <dd ng-show="record.statusSelect >= 2">{{record.advanceTotal}}  {{record.currency.symbol}} Working</dd>
+	                  
+	                  </dl>
+						Cgst: {{record.netCgst}}
+	              ]]></viewer>
+  </field>
+  <field name="netIgst" hidden="true" />
+			<field name="netCgst" hidden="true" />
+			<field name="netSgst" hidden="true" />
+  </replace>
+  </extend>
+</form>
+
+</object-views>
